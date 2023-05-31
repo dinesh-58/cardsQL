@@ -16,8 +16,8 @@
             <span>Card direction:</span>
             <!--? Can use arrow characters (not emoji) for these instead of text-->
             <input type="radio" name="card-direction" value="1" checked>Forward
-            <input type="radio" name="card-direction" value="3">Backward
-            <input type="radio" name="card-direction" value="2">Bi-directional
+            <input type="radio" name="card-direction" value="2">Backward
+            <input type="radio" name="card-direction" value="3">Bi-directional
             <label>
                 Back:
             <textarea name="card-back" id="" maxlength="255" spellcheck="true" cols="30" rows="10" placeholder="Answer. Example: Styling our HTML" required></textarea>

@@ -17,7 +17,7 @@ create table cards(
 -- direction values: 
     -- 0 : disabled
     -- 1 : forward direction
-    -- 2 : bi-directional
-    -- 3 : backward direction
+    -- 2 : backward direction
+    -- 3 : bi-directional
 
 -- CURRENT_DATE returns date as text in YYYY-MM-DD format
