@@ -11,6 +11,7 @@ create table cards(
     check(successfulRevisions >= 0),
     easeFactor real not null default 2.5
     check(easeFactor <=2.5 AND easeFactor >= 1.3),
+    interval int not null default 1 check(interval >=0),
     scheduledDate text not null default CURRENT_DATE
 ) strict;
 
