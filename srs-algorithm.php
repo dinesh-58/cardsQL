@@ -1,49 +1,36 @@
 <?php
+function scheduleNextRevision($card, $rating) {
+    // TODO if $rating >3 throw exception. resulting value of $scheduledDate
+    // seems to be same as $rating=3 due to imposing limit on easeFactor but still, throw?
+    
+    // no need for exceptions for other variables because constraints are already applied in database.
+    // only this one is user specified
+    
+    // workaround for now
+    $rating = $rating < 0 ? 0 : ($rating > 3 ? 3 : $rating);
 
-// SM-2
-// ef' = f(ef, q) // make function for this?
+    if ($rating >=2) {   // correct response
+        $card['interval'] = ($card['successfulRevisions'] == 0) ? 1  
+        : (($card['successfulRevisions'] == 1) ? 6
+        : round($card['interval'] * $card['easeFactor']));
 
-//  ------ default values. don't copy these
-$quality = readline('Enter card rating: ');  // 0-3
-$interval = 1;
-$easeFactor = 2.5;
-$successfulRevisions = 12;
-//  ------ till here
+        $card['successfulRevisions']++; 
+    } else {            // incorrect response
+        $card['successfulRevisions'] = 0;
+        $card['interval'] = 1;
+    }
 
-// TODO if $quality >3 throw exception. result of $scheduledDate seems to be same as $quality=3 due to imposing limit but still, throw?
-// or if > 3, set equals to 3?
-// no need for other variables because constraint is already applied. only this one is user specified
-$quality = $quality < 0 ? 0 : ($quality > 3 ? 3 : $quality);
-// throw exception nai? kinaki it will help find any potential problems
-if ($quality >=2) {   // correct response
-    $interval = ($successfulRevisions == 0) ? 1  
-    : (($successfulRevisions == 1) ? 6
-    : round($interval * $easeFactor));
+    // calculating new easeFactor
+    $card['easeFactor'] += (0.1 - (4-$rating) * (0.09 + (4-$rating) * 0.03)); 
 
-    $successfulRevisions++; 
-} else {            // incorrect response
-    $successfulRevisions = 0;
-    $interval = 1;
+    // ensure easeFactor does not cross limits
+    $card['easeFactor'] = ($card['easeFactor'] < 1.3) ? 1.3 
+    : (($card['easeFactor'] > 2.5) ? 2.5 
+    : $card['easeFactor']);
+
+    // old scheduledDate value is only for checking if due today. 
+    // not used for calculating new scheduledDate
+    // new scheduled date is just today + interval days
+    $card['scheduledDate'] = date('Y-m-d', strtotime('+'.$card['interval'].' days'));  
+    return $card;
 }
-// calculating new easeFactor
-$easeFactor += (0.1 - (4-$quality) * (0.09 + (4-$quality) * 0.03)); 
-// ensure easeFactor does not cross limits
-$easeFactor = ($easeFactor < 1.3) ? 1.3 
-: (($easeFactor > 2.5) ? 2.5 
-: $easeFactor);
-
-// old scheduledDate value is only for checking if due today or not
-// new scheduled date is just today + interval days
-$scheduledDate = date('Y-m-d', strtotime("+$interval days"));  
-// return n, EF, I
-echo "ns: $successfulRevisions\n";
-echo "EF: $easeFactor\n";
-echo "In: $interval\n";
-echo "RD: $scheduledDate";
-
-
-
-/*
-echo 'Using mktime: '.mktime(0,0,0,date("m"),date('d'),date('Y'));
-echo 'Using time(): '.time();
-*/
