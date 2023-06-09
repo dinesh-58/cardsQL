@@ -26,9 +26,7 @@ if (isset($_GET['card-rating'])) {
     $statementUpdate->execute();
 } 
 
-// 1st card?
-$sqlSelectCard = 'select * from cards limit 1'; 
-// $sqlSelectCard = 'select * from cards where scheduledDate >= CURRENT_DATE limit 1';
+$sqlSelectCard = 'select * from cards where scheduledDate <= CURRENT_DATE limit 1';
 $statementSelect = $pdo->query($sqlSelectCard);
 $currentCard = $statementSelect->fetch(PDO::FETCH_ASSOC); 
 $_SESSION['prevCard'] = $currentCard;
