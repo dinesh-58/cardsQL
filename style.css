@@ -1,3 +1,57 @@
+html {
+    font-size: 62.5%;
+}
+body * {
+    box-sizing: border-box;
+}
+header h1 {
+    text-align: center;
+}
+
+/*
+header ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-evenly;
+    padding: 0 4rem;
+}
+*/
+header ul {
+    text-align: center;
+}
+header li {
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+legend {
+    border: 1px solid black;
+}
+#card-insert-form {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#card-insert-form > label {
+    flex-basis: 30%;
+}
+#card-insert-form textarea{
+    width: 100%;
+}
+#card-insert-form span {
+    display: block;
+    text-align: center;
+}
+
+#card-direction-container {
+    display: flex;
+    flex-flow: column;
+}
+input[type="radio"] {
+    margin: 3px;
+    vertical-align: text-top;
+}
 .hidden {
     display: none !important;
 }
