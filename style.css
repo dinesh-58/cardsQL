@@ -18,6 +18,7 @@ header ul {
 */
 header ul {
     text-align: center;
+    padding-inline-start: 0;
 }
 header li {
     display: inline-block;
