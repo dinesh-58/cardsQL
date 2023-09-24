@@ -1,13 +1,15 @@
 <?php
-// WARNING: currently this only keeps selecting the same card. 
 
 require_once './header.html';
 require_once './srs-algorithm.php';
 $pdo = new PDO('sqlite:cardsql.db');
 session_start(); 
+
 if (isset($_GET['card-rating'])) {
-    // update card values in DB
-    // overwrite old values in session variable for last 4 columns in DB
+    // if a card was already shown, user will rate their ability to remember it.
+    // we then schedule it's next repitition  
+    
+    // overwrite old values in session variable for last 4 columns 
     $_SESSION['prevCard'] = scheduleNextRevision($_SESSION['prevCard'], $_GET['card-rating']);
     $sqlUpdateCard = 'update cards
                       set
@@ -26,19 +28,14 @@ if (isset($_GET['card-rating'])) {
     $statementUpdate->execute();
 } 
 
+// get next card (considered as 1st card if page is loaded for the 1st time)
 $sqlSelectCard = 'select * from cards where scheduledDate <= CURRENT_DATE limit 1';
 $statementSelect = $pdo->query($sqlSelectCard);
 $currentCard = $statementSelect->fetch(PDO::FETCH_ASSOC); 
 $_SESSION['prevCard'] = $currentCard;
 if (!$currentCard) echo 'Congrats! You have reviewed all cards for today.';
-
-// TODO delete these 4 lines later
-echo '<pre>';
-print_r($currentCard);
-print_r($_SESSION['prevCard']);
-echo '</pre>';
-
 ?>
+
 <html lang="en">
     <head>
         <title>CardsQL| Review cards</title>
