@@ -1,8 +1,21 @@
+:root {
+    --primaryPurple: #40445a;
+    --secondaryPurple: #646686;
+    --dimWhite: #f2f2f2;
+}
 html {
     font-size: 62.5%;
+    /* sets root font size to 10px for easier calculation of rem */
+
 }
 body * {
     box-sizing: border-box;
+}
+body {
+    background-color: var(--primaryPurple);
+    color: var(--dimWhite);
+    font-size: 1.6rem;
+    font-family: monospace;
 }
 header h1 {
     text-align: center;
@@ -60,15 +73,15 @@ input[type="radio"] {
 
 table {
     border-collapse: collapse;
-    border: 2px solid rgb(200, 200, 200);
+    border: 2px solid var(--dimWhite);
 }
 
 td,
 th {
-    border: 1px solid rgb(190, 190, 190);
+    border: 1px solid var(--dimWhite);
     padding: 2px;
 }
 
-tr:nth-child(even) {  
-  background-color: #eee;
+thead, tr:nth-child(even) {  
+  background-color: var(--secondaryPurple);
 }
