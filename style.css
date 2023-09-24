@@ -56,3 +56,19 @@ input[type="radio"] {
 .hidden {
     display: none !important;
 }
+
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+}
+
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 2px;
+}
+
+tr:nth-child(even) {  
+  background-color: #eee;
+}

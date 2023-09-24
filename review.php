@@ -47,6 +47,8 @@ if (!$currentCard) echo 'Congrats! You have reviewed all cards for today.';
         <form method="GET">
             <h3><?=$currentCard['front'] ?></h3>
             <button id="showAnswerBtn" type="button" onclick="showAnswer()">Show Answer</button>
+            <!-- NOTE: type for above button is "button" so that it doesn't submit form data.
+               * however, below buttons should submit form data i.e. card rating -->
 
             <div id="answer-container" class="hidden">
                 <h4><?=$currentCard['back']?></h4>

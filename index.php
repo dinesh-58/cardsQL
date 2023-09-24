@@ -41,32 +41,33 @@
 
         <?php 
         if (isset($_GET['submit'])) {
-        $front = $_GET['card-front'];
-        $back = $_GET['card-back'];
-        $direction = $_GET['card-direction'];
+            $front = $_GET['card-front'];
+            $back = $_GET['card-back'];
+            $direction = $_GET['card-direction'];
 
-        $pdo = new PDO('sqlite:cardsql.db');
+            $pdo = new PDO('sqlite:cardsql.db');
 
-        // we only insert values specifiable by user. the rest all have default values set in the database schema
-        $query = 'insert into cards(front, back, direction) values(?, ?, ?);';
+            // we only insert values specifiable by user. the rest all have default values set in the database schema
+            $query = 'insert into cards(front, back, direction) values(?, ?, ?);';
 
-        // prepare statement
-        $statement = $pdo->prepare($query);
-        $statement->bindValue(1, $front, PDO::PARAM_STR);
-        $statement->bindValue(2, $back,  PDO::PARAM_STR);
-        $statement->bindValue(3, $direction, PDO::PARAM_INT);
+            // prepare statement
+            $statement = $pdo->prepare($query);
+            $statement->bindValue(1, $front, PDO::PARAM_STR);
+            $statement->bindValue(2, $back,  PDO::PARAM_STR);
+            $statement->bindValue(3, $direction, PDO::PARAM_INT);
 
-        if ($statement->execute()) {
-        echo 'Card created!';}
-        /*
-        // TODO create custom-functions.php file. displayMessage(success, message)  
-        // if success, echo html div with green background & tick
-        // else use red background & cross
-        // after creating, replace the above echo statement with these 2 lines below
+            if ($statement->execute()) {
+                echo 'Card created!';
+            }
+            /*
+            // TODO: create custom-functions.php file. displayMessage(success, message)  
+            // if success, echo html div with green background & tick
+            // else use red background & cross
+            // after creating, replace the above echo statement with these 2 lines below
 
-        displayMessage(true, 'Card created!');
-        } else displayMessage(false, 'Error creating card');
-        */
+            displayMessage(true, 'Card created!');
+            } else displayMessage(false, 'Error creating card');
+            */
         }
         ?>
 
