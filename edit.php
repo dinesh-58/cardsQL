@@ -20,7 +20,19 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Front</th>
-                    <th scope="col">Card Direction</th>
+                    <th scope="col" class="tooltip-creator">
+                        <span>Card Direction</span>
+                        <span class="tooltip-question-mark">?</span>
+                        <div class="tooltip-container">
+                            <p>Meaning of values:</p>
+                            <ul>
+                                <li>0 = disabled</li>
+                                <li>1 = forward</li>
+                                <li>2 = backward</li>
+                                <li>3 = bi-directional</li>
+                            </ul>
+                        </div>
+                    </th>
                     <th scope="col">Back</th>
                     <th scope="col">Scheduled Date</th>
                 </tr> 
@@ -32,24 +44,7 @@
                     <tr>
                         <th scope="row"><?=$row['id']?></th>
                         <td><?=$row['front']?></td>
-                        <td><?php 
-                            switch($row['direction']) {
-                                case 0:
-                                    echo 'disabled';
-                                    break;
-                                case 1:
-                                    echo 'forward';
-                                    break;
-                                case 2:
-                                    echo 'backward';
-                                    break;
-                                case 3:
-                                    echo 'bi-directional';
-                                    break;
-                                default :
-                                    echo '<strong style="background:red;">Error: Invalid direction value</strong>';
-                            }
-                        ?></td>
+                        <td><?=$row['direction'];?></td>
                         <td><?=$row['back']?></td>
                         <td><?=$row['scheduledDate']?></td>
                         <!-- TODO: edit button which onclick causes edit dialog to be shown -->

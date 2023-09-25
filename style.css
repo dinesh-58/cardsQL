@@ -1,7 +1,9 @@
 :root {
     --primaryPurple: #40445a;
     --secondaryPurple: #646686;
+    /* secondaryPurple is used for alternate rows in table */
     --dimWhite: #f2f2f2;
+    --gray: #3b3b3b;
 }
 html {
     font-size: 62.5%;
@@ -83,5 +85,27 @@ th {
 }
 
 thead, tr:nth-child(even) {  
-  background-color: var(--secondaryPurple);
+    background-color: var(--secondaryPurple);
+}
+
+.tooltip-creator {
+    position: relative;
+    cursor: help;
+}
+.tooltip-container {
+    position: absolute;
+    left: -10%;
+    visibility: hidden;
+    font-size: 1.2rem;
+    background: var(--gray);
+    width: 120%;
+    padding: 5px;
+
+    &>ul {
+        text-align: left;
+        padding-inline-start: 20px;
+    }
+}
+.tooltip-creator:hover .tooltip-container {
+    visibility: visible;
 }
