@@ -75,11 +75,12 @@
                         <textarea name="card-back" id="" maxlength="255" spellcheck="true" rows="10" placeholder="Answer. Example: Styling our HTML" required></textarea>
                     </label>
                     <label><span>Scheduled Date:</span>
-                        <input name="card-edited-date" type="date">
+                        <input name="card-new-date" type="date">
                     </label>
                 </fieldset>
                 <button type="button">Cancel</button>
-                <button type="submit">Confirm</button>
+                <button type="submit">Delete card</button>
+                <button type="submit">Confirm changes</button>
             </form>
         </dialog>
 

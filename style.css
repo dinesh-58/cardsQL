@@ -1,3 +1,4 @@
+/* ================  section_comment_example  ================ */
 :root {
     --primaryPurple: #40445a;
     --secondaryPurple: #646686;
@@ -73,6 +74,7 @@ input[type="radio"] {
 }
 
 
+/* ================  table  ================ */
 table {
     border-collapse: collapse;
     border: 2px solid var(--dimWhite);
@@ -88,6 +90,25 @@ thead, tr:nth-child(even) {
     background-color: var(--secondaryPurple);
 }
 
+table#editable-cards-table tbody tr{
+    cursor: pointer;
+
+    &:hover {
+        border: solid var(--dimWhite);
+        border-width: 3px 0;
+    }
+}
+
+/* ================  tooltip  ================ */
+.tooltip-question-mark {
+    display: inline-block;
+    vertical-align: middle;
+    height: 1.3em;
+    width: 1.3em;
+    border: 1px solid var(--dimWhite);
+    border-radius: 50%;
+    opacity: .5;
+}
 .tooltip-creator {
     position: relative;
     cursor: help;
@@ -106,6 +127,13 @@ thead, tr:nth-child(even) {
         padding-inline-start: 20px;
     }
 }
-.tooltip-creator:hover .tooltip-container {
-    visibility: visible;
+.tooltip-creator:hover {
+    .tooltip-container { visibility: visible; }
+    .tooltip-question-mark { opacity: 1; }
+}
+
+/* ================  edit dialog  ================ */
+dialog {
+    background: var(--secondaryPurple);
+    color: var(--dimWhite);
 }
