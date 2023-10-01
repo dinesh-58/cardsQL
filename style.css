@@ -19,6 +19,12 @@ body {
     color: var(--dimWhite);
     font-size: 1.6rem;
     font-family: monospace;
+    max-width: 80%;
+    margin-left: auto; 
+    margin-right: auto; 
+}
+a {
+    color: var(--dimWhite);
 }
 header h1 {
     text-align: center;
