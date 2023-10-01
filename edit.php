@@ -47,7 +47,6 @@
                         <td><?=$row['direction'];?></td>
                         <td><?=$row['back']?></td>
                         <td><?=$row['scheduledDate']?></td>
-                        <!-- TODO: edit button which onclick causes edit dialog to be shown -->
                     </tr>
                     <?php
                 }
@@ -55,12 +54,12 @@
             </tbody>
         </table>
 
-        <dialog open id="edit-card-dialog">
-            <form method="get">
+        <dialog id="edit-card-dialog">
+            <form method="post">
                 <fieldset>
                     <legend></legend>
+                    <input type="hidden" name="id">
                     <label><span>Front:</span>
-                        <!-- TODO: add name attribs here to work with php -->
                         <textarea name="card-front" id="" maxlength="255" spellcheck="true" rows="10" placeholder="Question. Example: What is CSS used for?" required autofocus></textarea>
                     </label>
                     <label><span>Card Direction:</span>
@@ -78,12 +77,11 @@
                         <input name="card-new-date" type="date">
                     </label>
                 </fieldset>
-                <button type="button">Cancel</button>
-                <button type="submit">Delete card</button>
-                <button type="submit">Confirm changes</button>
+                <button type="button" class="dialog-cancel">Cancel</button>
+                <button type="submit" name="delete-card">Delete card</button>
+                <button type="submit" name="edit-card">Confirm changes</button>
             </form>
         </dialog>
-
 
         <script src="./edit-logic.js"></script>
     </body>
