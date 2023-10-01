@@ -10,8 +10,24 @@
         <?php require_once './header.html'?>
         <?php
         $pdo = new PDO('sqlite:cardsql.db');
-        $sql = 'select * from cards;';
-        $result = $pdo->query($sql);
+        if (isset($_POST['delete-card'])) {
+            $resultDelete = $pdo->query("delete from cards where id = {$_POST['id']};");
+            echo ($resultDelete) ? "Card deleted" : "Error deleting card";
+        } 
+        else if (isset($_POST['edit-card'])) {
+            $editQuery = 'update cards set front=:front, back=:back, direction=:direction, scheduledDate=:date where id=:id';
+            // $editQuery = 'update cards set front=":front", back=":back", direction=:direction, scheduledDate=":date" where id=:id';
+            $statement = $pdo->prepare($editQuery);
+            $statement->bindValue(':front', $_POST['card-front'], PDO::PARAM_STR);
+            $statement->bindValue(':back', $_POST['card-back'], PDO::PARAM_STR);
+            $statement->bindValue(':direction', $_POST['card-direction'], PDO::PARAM_INT);
+            $statement->bindValue(':date', $_POST['card-new-date'], PDO::PARAM_STR);
+            $statement->bindValue(':id', $_POST['id'], PDO::PARAM_INT);
+            echo ($statement->execute()) ? "Card edited" : "Error editing card";
+        }
+
+        $sqlSelect = 'select id, front, back, direction, scheduledDate from cards;';
+        $resultSelect = $pdo->query($sqlSelect);
 
         ?>
         <h2>Click on the row you want to edit</h2>
@@ -39,7 +55,7 @@
             </thead>
             <tbody>
                 <?php
-                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                while($row = $resultSelect->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
                         <th scope="row"><?=$row['id']?></th>
