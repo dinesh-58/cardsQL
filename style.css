@@ -1,8 +1,30 @@
+/* ================  section_comment_example  ================ */
+:root {
+    --primaryPurple: #40445a;
+    --secondaryPurple: #646686;
+    /* secondaryPurple is used for alternate rows in table */
+    --dimWhite: #f2f2f2;
+    --gray: #3b3b3b;
+}
 html {
     font-size: 62.5%;
+    /* sets root font size to 10px for easier calculation of rem */
+
 }
 body * {
     box-sizing: border-box;
+}
+body {
+    background-color: var(--primaryPurple);
+    color: var(--dimWhite);
+    font-size: 1.6rem;
+    font-family: monospace;
+    max-width: 80%;
+    margin-left: auto; 
+    margin-right: auto; 
+}
+a {
+    color: var(--dimWhite);
 }
 header h1 {
     text-align: center;
@@ -18,6 +40,7 @@ header ul {
 */
 header ul {
     text-align: center;
+    padding-inline-start: 0;
 }
 header li {
     display: inline-block;
@@ -54,4 +77,69 @@ input[type="radio"] {
 }
 .hidden {
     display: none !important;
+}
+
+
+/* ================  table  ================ */
+table {
+    border-collapse: collapse;
+    border: 2px solid var(--dimWhite);
+}
+
+td,
+th {
+    border: 1px solid var(--dimWhite);
+    padding: 2px;
+}
+
+thead, tr:nth-child(even) {  
+    background-color: var(--secondaryPurple);
+}
+
+table#editable-cards-table tbody tr{
+    cursor: pointer;
+
+    &:hover {
+        border: solid var(--dimWhite);
+        border-width: 3px 0;
+    }
+}
+
+/* ================  tooltip  ================ */
+.tooltip-question-mark {
+    display: inline-block;
+    vertical-align: middle;
+    height: 1.3em;
+    width: 1.3em;
+    border: 1px solid var(--dimWhite);
+    border-radius: 50%;
+    opacity: .5;
+}
+.tooltip-creator {
+    position: relative;
+    cursor: help;
+}
+.tooltip-container {
+    position: absolute;
+    left: -10%;
+    visibility: hidden;
+    font-size: 1.2rem;
+    background: var(--gray);
+    width: 120%;
+    padding: 5px;
+
+    &>ul {
+        text-align: left;
+        padding-inline-start: 20px;
+    }
+}
+.tooltip-creator:hover {
+    .tooltip-container { visibility: visible; }
+    .tooltip-question-mark { opacity: 1; }
+}
+
+/* ================  edit dialog  ================ */
+dialog {
+    background: var(--secondaryPurple);
+    color: var(--dimWhite);
 }

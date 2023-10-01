@@ -1,6 +1,5 @@
 <?php
 
-require_once './header.html';
 require_once './srs-algorithm.php';
 $pdo = new PDO('sqlite:cardsql.db');
 session_start(); 
@@ -44,9 +43,12 @@ if (!$currentCard) echo 'Congrats! You have reviewed all cards for today.';
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
+        <?php require_once './header.html';?>
         <form method="GET">
             <h3><?=$currentCard['front'] ?></h3>
             <button id="showAnswerBtn" type="button" onclick="showAnswer()">Show Answer</button>
+            <!-- NOTE: type for above button is "button" so that it doesn't submit form data.
+               * however, below buttons should submit form data i.e. card rating -->
 
             <div id="answer-container" class="hidden">
                 <h4><?=$currentCard['back']?></h4>
