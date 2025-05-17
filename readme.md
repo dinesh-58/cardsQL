@@ -1,5 +1,3 @@
-Submission for my BCA 4th sem project. The project report can be [found here](https://github.com/dinesh-58/college-files/blob/main/4th-sem/project-1/final-report/final-report.org) if you want an explanation of what this does.
-
 ## Requirements  
 - php (Windows users may require some additional steps. See [here](https://www.php.net/manual/en/sqlite3.installation.php))
 - php-sqlite
