@@ -1,16 +1,15 @@
-## Requirements  
+<!---
+Note to self: versions 1.0.0 and before represents state of project before being used for 6th sem project 
+--->
+## Requirements
 - php (Windows users may require some additional steps. See [here](https://www.php.net/manual/en/sqlite3.installation.php))
 - sqlite
 - php-sqlite
 
-## Usage   
-Find your `php.ini` file. Located in `/etc/php/` on Linux.
-Uncomment the line `extension=pdo_sqlite`.
-You may also want to enable error display when developing, like so: 
-```ini
-display_errors = On
-display_startup_errors = On
-```
+## Usage
+- Install the above requirements.
+- Find your `php.ini` file. Located in `/etc/php/` on Linux &
+  uncomment the line `extension=pdo_sqlite`.
 
 ``` sh
 git clone https://github.com/dinesh-58/cardsQL.git
@@ -29,3 +28,11 @@ Then, open `localhost:8000` in your browser.
 ### Edit cards Interface
 ![](./screenshots/edit-before.png)
 ![](./screenshots/edit-after.png)
+
+## Developing
+You may also want to enable php error display. Set these in your `php.ini` file.
+```ini
+display_errors = On
+display_startup_errors = On
+```
+- *Create a separate branch for features & open PRs against main*
