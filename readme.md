@@ -35,4 +35,4 @@ You may also want to enable php error display. Set these in your `php.ini` file.
 display_errors = On
 display_startup_errors = On
 ```
-- *Create a separate branch for features & open PRs against main*
+- **Create a separate branch for features & open PRs against main**
