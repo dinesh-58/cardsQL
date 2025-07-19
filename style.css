@@ -9,7 +9,6 @@
 html {
     font-size: 62.5%;
     /* sets root font size to 10px for easier calculation of rem */
-
 }
 body * {
     box-sizing: border-box;
@@ -20,8 +19,8 @@ body {
     font-size: 1.6rem;
     font-family: monospace;
     max-width: 80%;
-    margin-left: auto; 
-    margin-right: auto; 
+    margin-left: auto;
+    margin-right: auto;
 }
 a {
     color: var(--dimWhite);
@@ -59,7 +58,7 @@ legend {
 #card-insert-form > label {
     flex-basis: 30%;
 }
-#card-insert-form textarea{
+#card-insert-form textarea {
     width: 100%;
 }
 #card-insert-form span {
@@ -79,7 +78,6 @@ input[type="radio"] {
     display: none !important;
 }
 
-
 /* ================  table  ================ */
 table {
     border-collapse: collapse;
@@ -92,11 +90,13 @@ th {
     padding: 2px;
 }
 
-thead, tr:nth-child(even) {  
+/* table striping */
+thead,
+tr:nth-child(even) {
     background-color: var(--secondaryPurple);
 }
 
-table#editable-cards-table tbody tr{
+table#editable-cards-table tbody tr {
     cursor: pointer;
 
     &:hover {
@@ -106,6 +106,11 @@ table#editable-cards-table tbody tr{
 }
 
 /* ================  tooltip  ================ */
+/* NOTE: no longer being used. keeping around in case this comes in handy
+to use, put a .tooltip-container element inside a .tooltip-creator
+.tooltip-container will be hidden by default & will be shown when hovering over .tooltip-creator.
+can delete all tooltip styles if not using at all
+*/
 .tooltip-question-mark {
     display: inline-block;
     vertical-align: middle;
@@ -113,7 +118,7 @@ table#editable-cards-table tbody tr{
     width: 1.3em;
     border: 1px solid var(--dimWhite);
     border-radius: 50%;
-    opacity: .5;
+    opacity: 0.5;
 }
 .tooltip-creator {
     position: relative;
@@ -128,14 +133,18 @@ table#editable-cards-table tbody tr{
     width: 120%;
     padding: 5px;
 
-    &>ul {
+    & > ul {
         text-align: left;
         padding-inline-start: 20px;
     }
 }
 .tooltip-creator:hover {
-    .tooltip-container { visibility: visible; }
-    .tooltip-question-mark { opacity: 1; }
+    .tooltip-container {
+        visibility: visible;
+    }
+    .tooltip-question-mark {
+        opacity: 1;
+    }
 }
 
 /* ================  edit dialog  ================ */

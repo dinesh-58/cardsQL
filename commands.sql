@@ -5,10 +5,7 @@ create table cards(
     id integer primary key autoincrement,
     front text not null check(length(front) <= 255),
     back text not null check(length(back) <= 255),
-    direction int not null default 1 check(
-        direction >= 0
-        and direction <= 3
-    ),
+    direction text not null default 'forward' check(direction in ('disabled','forward','backward','both'))
     successfulRevisions int not null default 0 check(successfulRevisions >= 0),
     easeFactor real not null default 2.5 check(
         easeFactor <= 2.5
@@ -20,11 +17,5 @@ create table cards(
         AND DATE(scheduledDate, '+0 days') IS scheduledDate
     )
 ) strict;
-
--- direction values: 
-    -- 0 : disabled
-    -- 1 : forward direction
-    -- 2 : backward direction
-    -- 3 : bi-directional
 
 -- CURRENT_DATE returns date as text in YYYY-MM-DD format

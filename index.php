@@ -7,8 +7,8 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <?php require_once './header.html'?>
-        <form action="" method=""> 
+        <?php require_once "./header.html"; ?>
+        <form action="" method="">
             <fieldset id="card-insert-form">
                 <legend>Insert a new card</legend>
 
@@ -21,13 +21,16 @@
                     <legend>Card direction:</legend>
                     <!--? Can use arrow characters (not emoji) for these instead of text-->
                     <label>
-                        <input type="radio" name="card-direction" value="1" checked>Forward
+                        <input type="radio" name="card-direction" value="disabled">Disabled
                     </label>
                     <label>
-                        <input type="radio" name="card-direction" value="2">Backward
+                        <input type="radio" name="card-direction" value="forward" checked>Forward
                     </label>
                     <label>
-                        <input type="radio" name="card-direction" value="3">Bi-directional
+                        <input type="radio" name="card-direction" value="backward">Backward
+                    </label>
+                    <label>
+                        <input type="radio" name="card-direction" value="both">Bi-directional
                     </label>
                 </fieldset>
 
@@ -37,30 +40,30 @@
                 </label>
             </fieldset>
             <button name="submit">Submit</button>
-        </form> 
+        </form>
 
-        <?php 
-        if (isset($_GET['submit'])) {
-            $front = $_GET['card-front'];
-            $back = $_GET['card-back'];
-            $direction = $_GET['card-direction'];
+        <?php if (isset($_GET["submit"])) {
+            $front = $_GET["card-front"];
+            $back = $_GET["card-back"];
+            $direction = $_GET["card-direction"];
 
-            $pdo = new PDO('sqlite:cardsql.db');
+            $pdo = new PDO("sqlite:cardsql.db");
 
             // we only insert values specifiable by user. the rest all have default values set in the database schema
-            $query = 'insert into cards(front, back, direction) values(?, ?, ?);';
+            $query =
+                "insert into cards(front, back, direction) values(?, ?, ?);";
 
             // prepare statement
             $statement = $pdo->prepare($query);
             $statement->bindValue(1, $front, PDO::PARAM_STR);
-            $statement->bindValue(2, $back,  PDO::PARAM_STR);
-            $statement->bindValue(3, $direction, PDO::PARAM_INT);
+            $statement->bindValue(2, $back, PDO::PARAM_STR);
+            $statement->bindValue(3, $direction, PDO::PARAM_STR);
 
             if ($statement->execute()) {
-                echo 'Card created!';
+                echo "Card created!";
             }
             /*
-            // TODO: create custom-functions.php file. displayMessage(success, message)  
+            // TODO: create custom-functions.php file. displayMessage(success, message)
             // if success, echo html div with green background & tick
             // else use red background & cross
             // after creating, replace the above echo statement with these 2 lines below
@@ -68,9 +71,7 @@
             displayMessage(true, 'Card created!');
             } else displayMessage(false, 'Error creating card');
             */
-        }
-        ?>
+        } ?>
 
     </body>
 </html>
-

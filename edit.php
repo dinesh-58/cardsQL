@@ -7,28 +7,42 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <?php require_once './header.html'?>
+        <?php require_once "./header.html"; ?>
         <?php
-        $pdo = new PDO('sqlite:cardsql.db');
-        if (isset($_POST['delete-card'])) {
-            $resultDelete = $pdo->query("delete from cards where id = {$_POST['id']};");
-            echo ($resultDelete) ? "Card deleted" : "Error deleting card";
-        } 
-        else if (isset($_POST['edit-card'])) {
-            $editQuery = 'update cards set front=:front, back=:back, direction=:direction, scheduledDate=:date where id=:id';
+        $pdo = new PDO("sqlite:cardsql.db");
+        if (isset($_POST["delete-card"])) {
+            $resultDelete = $pdo->query(
+                "delete from cards where id = {$_POST["id"]};",
+            );
+            echo $resultDelete ? "Card deleted" : "Error deleting card";
+        } elseif (isset($_POST["edit-card"])) {
+            $editQuery =
+                "update cards set front=:front, back=:back, direction=:direction, scheduledDate=:date where id=:id";
             // $editQuery = 'update cards set front=":front", back=":back", direction=:direction, scheduledDate=":date" where id=:id';
             $statement = $pdo->prepare($editQuery);
-            $statement->bindValue(':front', $_POST['card-front'], PDO::PARAM_STR);
-            $statement->bindValue(':back', $_POST['card-back'], PDO::PARAM_STR);
-            $statement->bindValue(':direction', $_POST['card-direction'], PDO::PARAM_INT);
-            $statement->bindValue(':date', $_POST['card-new-date'], PDO::PARAM_STR);
-            $statement->bindValue(':id', $_POST['id'], PDO::PARAM_INT);
-            echo ($statement->execute()) ? "Card edited" : "Error editing card";
+            $statement->bindValue(
+                ":front",
+                $_POST["card-front"],
+                PDO::PARAM_STR,
+            );
+            $statement->bindValue(":back", $_POST["card-back"], PDO::PARAM_STR);
+            $statement->bindValue(
+                ":direction",
+                $_POST["card-direction"],
+                PDO::PARAM_STR,
+            );
+            $statement->bindValue(
+                ":date",
+                $_POST["card-new-date"],
+                PDO::PARAM_STR,
+            );
+            $statement->bindValue(":id", $_POST["id"], PDO::PARAM_INT);
+            echo $statement->execute() ? "Card edited" : "Error editing card";
         }
 
-        $sqlSelect = 'select id, front, back, direction, scheduledDate from cards;';
+        $sqlSelect =
+            "select id, front, back, direction, scheduledDate from cards;";
         $resultSelect = $pdo->query($sqlSelect);
-
         ?>
         <h2>Click on the row you want to edit</h2>
         <table id="editable-cards-table">
@@ -36,37 +50,21 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Front</th>
-                    <th scope="col" class="tooltip-creator">
-                        <span>Card Direction</span>
-                        <span class="tooltip-question-mark">?</span>
-                        <div class="tooltip-container">
-                            <p>Meaning of values:</p>
-                            <ul>
-                                <li>0 = disabled</li>
-                                <li>1 = forward</li>
-                                <li>2 = backward</li>
-                                <li>3 = bi-directional</li>
-                            </ul>
-                        </div>
-                    </th>
                     <th scope="col">Back</th>
+                    <th scope="col">Card Direction</th>
                     <th scope="col">Scheduled Date</th>
-                </tr> 
+                </tr>
             </thead>
             <tbody>
-                <?php
-                while($row = $resultSelect->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
+                <?php while ($row = $resultSelect->fetch(PDO::FETCH_ASSOC)) { ?>
                     <tr>
-                        <th scope="row"><?=$row['id']?></th>
-                        <td><?=$row['front']?></td>
-                        <td><?=$row['direction'];?></td>
-                        <td><?=$row['back']?></td>
-                        <td><?=$row['scheduledDate']?></td>
+                        <th scope="row"><?= $row["id"] ?></th>
+                        <td><?= $row["front"] ?></td>
+                        <td><?= $row["back"] ?></td>
+                        <td><?= $row["direction"] ?></td>
+                        <td><?= $row["scheduledDate"] ?></td>
                     </tr>
-                    <?php
-                }
-                ?>
+                    <?php } ?>
             </tbody>
         </table>
 
@@ -80,10 +78,10 @@
                     </label>
                     <label><span>Card Direction:</span>
                         <select name="card-direction">
-                            <option value="0">Disabled</option>
-                            <option value="1">Forward</option>
-                            <option value="2">Backward</option>
-                            <option value="3">Bi-directional</option>
+                            <option value="disabled">Disabled</option>
+                            <option value="forward">Forward</option>
+                            <option value="backward">Backward</option>
+                            <option value="both">Bi-directional</option>
                         </select>
                     </label>
                     <label><span>Back:</span>
