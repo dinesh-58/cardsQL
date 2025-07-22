@@ -6,7 +6,7 @@ session_start();
 
 if (isset($_GET["card-rating"])) {
     // if a card was already shown, user will rate their ability to remember it.
-    // we then schedule it's next repitition
+    // we then schedule its next repitition
 
     // overwrite old values in session variable for last 4 columns
     $_SESSION["prevCard"] = scheduleNextRevision(
@@ -81,9 +81,6 @@ if (!$currentCard) {
     <body>
         <?php require_once "./header.html"; ?>
         <form method="GET">
-            <!-- TODO: check direction here and show accordingly
-                try to check string val of direction instead of number
-            -->
             <h3><?= $questionText ?></h3>
             <button id="showAnswerBtn" type="button" onclick="showAnswer()">Show Answer</button>
             <!-- NOTE: type for above button is "button" so that it doesn't submit form data.
