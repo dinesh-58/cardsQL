@@ -50,8 +50,8 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Front</th>
-                    <th scope="col">Back</th>
                     <th scope="col">Card Direction</th>
+                    <th scope="col">Back</th>
                     <th scope="col">Scheduled Date</th>
                 </tr>
             </thead>
@@ -60,8 +60,8 @@
                     <tr>
                         <th scope="row"><?= $row["id"] ?></th>
                         <td><?= $row["front"] ?></td>
-                        <td><?= $row["back"] ?></td>
                         <td><?= $row["direction"] ?></td>
+                        <td><?= $row["back"] ?></td>
                         <td><?= $row["scheduledDate"] ?></td>
                     </tr>
                     <?php } ?>
