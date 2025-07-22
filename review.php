@@ -35,12 +35,39 @@ if (isset($_GET["card-rating"])) {
 
 // get next card (considered as 1st card if page is loaded for the 1st time)
 $sqlSelectCard =
-    "select * from cards where scheduledDate <= CURRENT_DATE limit 1";
+    "select * from cards where scheduledDate <= CURRENT_DATE and direction <> 'disabled'  limit 1";
 $statementSelect = $pdo->query($sqlSelectCard);
 $currentCard = $statementSelect->fetch(PDO::FETCH_ASSOC);
 $_SESSION["prevCard"] = $currentCard;
+$questionText = $answerText = "";
 if (!$currentCard) {
+    // TODO: maybe show this at center of screen instead
     echo "Congrats! You have reviewed all cards for today.";
+} else {
+    switch ($currentCard["direction"]) {
+        case "forward":
+            $questionText = $currentCard["front"];
+            $answerText = $currentCard["back"];
+            break;
+        case "backward":
+            $questionText = $currentCard["back"];
+            $answerText = $currentCard["front"];
+            break;
+        case "both":
+            // randomly use either front or back as question
+            if (rand(0, 1)) {
+                $questionText = $currentCard["front"];
+                $answerText = $currentCard["back"];
+            } else {
+                $questionText = $currentCard["back"];
+                $answerText = $currentCard["front"];
+            }
+            break;
+        default:
+            throw new Exception(
+                "Invalid card direction value '{$currentCard["direction"]}' for card with id {$currentCard["id"]}. Please edit it in the edit page.",
+            );
+    }
 }
 ?>
 
@@ -57,13 +84,13 @@ if (!$currentCard) {
             <!-- TODO: check direction here and show accordingly
                 try to check string val of direction instead of number
             -->
-            <h3><?= $currentCard["front"] ?></h3>
+            <h3><?= $questionText ?></h3>
             <button id="showAnswerBtn" type="button" onclick="showAnswer()">Show Answer</button>
             <!-- NOTE: type for above button is "button" so that it doesn't submit form data.
                * however, below buttons should submit form data i.e. card rating -->
 
             <div id="answer-container" class="hidden">
-                <h4><?= $currentCard["back"] ?></h4>
+                <h4><?= $answerText ?></h4>
                 <span>How well did you remember?</span>
                 <button name="card-rating" value="0">0 : Forgot</button>
                 <button name="card-rating" value="1">1 : Partially remembered</button>
