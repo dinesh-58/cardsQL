@@ -88,11 +88,11 @@ if (!$currentCard) {
 
             <div id="answer-container" class="hidden">
                 <h4><?= $answerText ?></h4>
-                <span>How well did you remember?</span>
+                <span>How hard was it to remember the answer?</span>
                 <button name="card-rating" value="0">0 : Forgot</button>
-                <button name="card-rating" value="1">1 : Partially remembered</button>
-                <button name="card-rating" value="2">2 : Remembered after some effort</button>
-                <button name="card-rating" value="3">3 : Remembered easily</button>
+                <button name="card-rating" value="1">1 : Remembered incompletely</button>
+                <button name="card-rating" value="2">2 : Required some effort</button>
+                <button name="card-rating" value="3">3 : Easy to remember</button>
             </div>
         </form>
 
