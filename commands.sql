@@ -2,7 +2,7 @@
 
 -- creating cards
 create table cards(
-    id integer primary key autoincrement,
+    id integer primary key check(id > 0),
     front text not null check(length(front) <= 255),
     back text not null check(length(back) <= 255),
     direction text not null default 'forward' check(direction in ('disabled','forward','backward','both'))
