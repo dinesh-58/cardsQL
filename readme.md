@@ -1,5 +1,5 @@
 <!---
-Note to self: versions 1.0.0 and before represents state of project before being used for 6th sem project 
+Note to self: versions 1.0.0 and before represents state of project before being used for 6th sem project
 --->
 ## Requirements
 - php (Windows users may require some additional steps. See [here](https://www.php.net/manual/en/sqlite3.installation.php))
@@ -29,10 +29,14 @@ Then, open `localhost:8000` in your browser.
 ![](./screenshots/edit-before.png)
 ![](./screenshots/edit-after.png)
 
-## Developing
-You may also want to enable php error display. Set these in your `php.ini` file.
-```ini
-display_errors = On
-display_startup_errors = On
-```
+## Notes for developers
+- Follow [Usage](#Usage) to setup the project
+- You may also want to enable php error display. Set these in your `php.ini` file.
+  ```ini
+  display_errors = On
+  display_startup_errors = On
+  ```
 - **Create a separate branch for features & open PRs against main**
+- To connect to the sqlite db w/ php, alwyas use the given function in `utils`
+- Use [PDO](https://www.php.net/manual/en/book.pdo.php) for db-related operations
+- When database schema changes, make sure you pull the latest changes, then delete `cardsql.db` and run `sqlite3 cardsql.db < commands.sql`
