@@ -100,8 +100,7 @@ table#editable-cards-table tbody tr {
     cursor: pointer;
 
     &:hover {
-        border: solid var(--dimWhite);
-        border-width: 3px 0;
+        outline: solid var(--dimWhite);
     }
 }
 
