@@ -33,3 +33,9 @@ create table cards(
 insert into cards(front, back) values('What is a variable in programming?', 'A symbolic name for storing data values.');
 insert into cards(front, back) values('What is an algorithm?', 'A finite set of instructions for solving a problem.');
 insert into cards(front, back) values('What does CPU stand for?', 'Central Processing Unit, the primary part of a computer that performs calculations.');
+
+-- MAYBE: implement some way to prevent insertion here, or limit to 1 row
+create table misc(
+    dailyTarget integer default 10 check(dailyTarget > 0),
+    dailyStreak integer default 0 check(dailyStreak >0)
+);
