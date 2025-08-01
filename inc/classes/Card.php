@@ -16,4 +16,6 @@ class Card
     // TODO: implement methods for:
     // - updating this card in db?
     // - srs + update?
+
+    // MAYBE: have one constructor that takes only card id & fills in other properties by getting data from db
 }
