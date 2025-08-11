@@ -6,29 +6,28 @@
 require_once "../bootstrap.php";
 require_once BASE_DIR . "/srs-algorithm.php";
 $pdo = connect_db();
-session_start();
+header('Content-Type: text/plain');
+session_start();  // NOTE: was copied from old code. prob unnecessary now
 
-if (!isset($_GET["card-rating"])) {
-    exit("Error: Card rating not specified");
+// this api route should probably be using POST & request body instead of query params but meh 
+if (!isset($_POST["card-id"])) {
+  http_response_code(400);
+  exit("Error: Card id not specified");
 }
-if (!isset($_GET["id"])) {
-    exit("Error: Card id not specified");
+if (!isset($_POST["card-rating"])) {
+  http_response_code(400);
+  exit("Error: Card rating not specified");
 }
 // user will rate their ability to remember it.
 // we then schedule its next repitition
 
 $stmtCurrCard = $pdo->prepare("select * from cards where id = ? limit 1");
-$stmtCurrCard->bindValue(1, $_POST["id"], PDO::PARAM_INT);
+$stmtCurrCard->bindValue(1, $_POST["card-id"], PDO::PARAM_INT);
 $stmtCurrCard->execute();
 $card = $stmtCurrCard->fetch(PDO::FETCH_ASSOC);
 
-echo "before rating: ";
-print_r($card);
-// overwrite old values in session variable for last 4 columns
-$card = scheduleNextRevision($card, $_GET["card-rating"]);
-
-echo "after rating: ";
-print_r($card);
+// overwrite old card w/ updated card data
+$card = scheduleNextRevision($card, $_POST["card-rating"]);
 
 $sqlUpdateCard = 'update cards
                       set
@@ -47,4 +46,6 @@ $stmtUpdate->bindValue(4, $card["scheduledDate"], PDO::PARAM_STR);
 $stmtUpdate->bindValue(5, $card["id"], PDO::PARAM_INT);
 $stmtUpdate->execute();
 
-// MAYBE: return some succes message here?
+// MAYBE: handle other HTTP statuses here too if error occurs
+http_response_code(200);
+echo 'Card rated successfully';

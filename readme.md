@@ -19,6 +19,8 @@ sqlite3 cardsql.db < commands.sql  # create required db file & tables
 ```
 Then, open `localhost:8000` in your browser.
 
+[!NOTE] If you use a separate port number, URL, you may want to update `BASE_URL` in `bootstrap.php`
+
 ## Screenshots
 ### Add/Home Interface
 ![](./screenshots/add.png)

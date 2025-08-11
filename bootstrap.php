@@ -1,5 +1,7 @@
 <?php
+// constant values to use across site
 define("BASE_DIR", __DIR__);
+define("BASE_URL", "http://localhost:8000");
 
 function connect_db()
 {
