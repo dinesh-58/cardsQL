@@ -18,7 +18,7 @@ if (!isset($_GET["id"])) {
 // we then schedule its next repitition
 
 $stmtCurrCard = $pdo->prepare("select * from cards where id = ? limit 1");
-$stmtCurrCard->bindValue(1, $_GET["card-rating"], PDO::PARAM_INT);
+$stmtCurrCard->bindValue(1, $_POST["id"], PDO::PARAM_INT);
 $stmtCurrCard->execute();
 $card = $stmtCurrCard->fetch(PDO::FETCH_ASSOC);
 
