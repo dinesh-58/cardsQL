@@ -5,36 +5,7 @@ require_once "./srs-algorithm.php";
 $pdo = new PDO("sqlite:cardsql.db");
 session_start();
 
-// start -- replace this w/ api/rateCard
-if (isset($_GET["card-rating"])) {
-    // if a card was already shown, user will rate their ability to remember it.
-    // we then schedule its next repitition
-
-    // overwrite old values in session variable for last 4 columns
-    $_SESSION["prevCard"] = scheduleNextRevision(
-        $_SESSION["prevCard"],
-        $_GET["card-rating"],
-    );
-    $sqlUpdateCard = 'update cards
-                      set
-                        `successfulRevisions` = ?,
-                        `easeFactor` = ?,
-                        `interval` = ?,
-                        `scheduledDate` = ?
-                      where id = ?';
-    $statementUpdate = $pdo->prepare($sqlUpdateCard);
-
-    $statementUpdate->bindValue(
-        1,
-        $_SESSION["prevCard"]["successfulRevisions"],
-    );
-    $statementUpdate->bindValue(2, $_SESSION["prevCard"]["easeFactor"]);
-    $statementUpdate->bindValue(3, $_SESSION["prevCard"]["interval"]);
-    $statementUpdate->bindValue(4, $_SESSION["prevCard"]["scheduledDate"]);
-    $statementUpdate->bindValue(5, $_SESSION["prevCard"]["id"]);
-    $statementUpdate->execute();
-}
-// end -- replace this w/ api/rateCard
+// TODO: start -- replace this w/ api/getCards.php & some other code
 
 // get next card (considered as 1st card if page is loaded for the 1st time)
 $sqlSelectCard =
@@ -72,6 +43,7 @@ if (!$currentCard) {
             );
     }
 }
+// TODO: start -- replace this w/ api/getCards.php
 ?>
 
 <html lang="en">
@@ -104,14 +76,10 @@ if (!$currentCard) {
     </form>
 
     <script type="text/javascript">
+        // Browsers will auto-create JS objects for elements with ids
         reviewCardForm.onsubmit = (e) => {
             e.preventDefault();
-            // TODO: do fetch() here instead
-            // reviewCardForm.submit();
             const formData = new FormData(reviewCardForm);
-            console.log(formData);
-            console.log(e.submitter);
-            // debugger;
             // formData doesn't include button value (card-rating), so manually add it
             if (e.submitter && e.submitter.name == "card-rating") {
                 formData.append(e.submitter.name, e.submitter.value);
