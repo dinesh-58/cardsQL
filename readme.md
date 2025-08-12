@@ -8,8 +8,7 @@ Note to self: versions 1.0.0 and before represents state of project before being
 
 ## Usage
 - Install the above requirements.
-- Find your `php.ini` file. Located in `/etc/php/` on Linux &
-  uncomment the line `extension=pdo_sqlite`.
+- Find your `php.ini` file & uncomment the line `extension=pdo_sqlite`. (Located in `/etc/php/` on Linux)
 
 ``` sh
 git clone https://github.com/dinesh-58/cardsQL.git
@@ -19,7 +18,8 @@ sqlite3 cardsql.db < commands.sql  # create required db file & tables
 ```
 Then, open `localhost:8000` in your browser.
 
-[!NOTE] If you use a separate port number, URL, you may want to update `BASE_URL` in `bootstrap.php`
+> [!NOTE] 
+> If you use a separate port number, URL, you may want to update `BASE_URL` in `bootstrap.php`
 
 ## Screenshots
 ### Add/Home Interface
