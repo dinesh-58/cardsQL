@@ -25,7 +25,7 @@ create table cards(
         length(scheduledDate) <= 10
         AND DATE(scheduledDate, '+0 days') IS scheduledDate
     ),
-    folder_id integer default 0 references folders(id)
+    folder_id integer default 1 references folders(id)
 ) strict;
 -- NOTE: CURRENT_DATE returns date as text in YYYY-MM-DD format
 
